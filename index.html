@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brugse Metten Wandelclub</title>
+    <meta name="description" content="Een wandelclub voor jong en oud in het hart van Brugge. Vier unieke wandeltochten, een warme gemeenschap en de mooiste routes in de Vlaamse regio.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* === CSS VARIABLES — Flemish flag palette === */
+        :root {
+            --gold:       #F5C800;
+            --deep-gold:  #B8960A;
+            --soft-gold:  #FAEAA0;
+            --black:      #1A1A1A;
+            --white:      #FFFFFF;
+            --cream:      #FDF6D8;
+            --charcoal:   #3D3D3A;
+            --stone:      #9A9890;
+            --font-h:     'Lora', Georgia, serif;
+            --font-b:     'Source Sans 3', system-ui, sans-serif;
+        }
+
+        /* === RESET & BASE === */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-b);
+            background: var(--cream);
+            color: var(--charcoal);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-h);
+            color: var(--black);
+            line-height: 1.25;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* === NAVIGATION === */
+        nav {
+            background: var(--black);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            height: 64px;
+        }
+
+        .nav-logo {
+            font-family: var(--font-h);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo-icon { font-size: 1.5rem; }
+
+        .nav-links {
+            display: flex;
+            gap: 0.15rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gold);
+            font-family: var(--font-b);
+            font-weight: 600;
+            font-size: 0.92rem;
+            padding: 0.45rem 0.8rem;
+            border-radius: 5px;
+            transition: background 0.18s, color 0.18s;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .nav-links a.nav-cta {
+            background: var(--gold);
+            color: var(--black);
+            margin-left: 0.6rem;
+            padding: 0.45rem 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .nav-links a.nav-cta:hover {
+            background: var(--deep-gold);
+            color: var(--black);
+        }
+
+        .mobile-menu a.nav-cta {
+            background: var(--gold);
+            color: var(--black);
+            font-weight: 700;
+            margin-top: 0.4rem;
+        }
+
+        .mobile-menu a.nav-cta:hover {
+            background: var(--deep-gold);
+            color: var(--black);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            background: var(--black);
+            border-top: 1px solid rgba(245,200,0,0.15);
+        }
+
+        .mobile-menu.open { display: block; }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0.75rem 1.5rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: var(--gold);
+            font-family: var(--font-b);
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 0.65rem 0.85rem;
+            border-radius: 5px;
+            transition: background 0.18s, color 0.18s;
+        }
+
+        .mobile-menu a:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* === ALERT BANNER === */
+        .alert-banner {
+            background: var(--gold);
+            color: var(--black);
+            text-align: center;
+            padding: 0.7rem 1.5rem;
+            font-family: var(--font-b);
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        .alert-banner a {
+            text-decoration: underline;
+            color: var(--black);
+        }
+
+        /* === HERO === */
+        .hero {
+            background: var(--black);
+            position: relative;
+            overflow: hidden;
+            padding: 3rem 1.5rem 2.5rem;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 15% 50%, rgba(245,200,0,0.12) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 50%, rgba(245,200,0,0.08) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        .hero-bg-text {
+            position: absolute;
+            font-family: var(--font-h);
+            font-size: clamp(8rem, 20vw, 18rem);
+            font-weight: 700;
+            color: rgba(245,200,0,0.04);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--black);
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.3rem 1rem;
+            border-radius: 999px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: clamp(2.4rem, 7vw, 4rem);
+            margin-bottom: 1.1rem;
+        }
+
+        .hero h1 span { color: var(--gold); }
+
+        .hero-sub {
+            color: var(--stone);
+            font-size: 1.15rem;
+            max-width: 540px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* === BUTTONS === */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0.85rem 1.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.18s;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .btn-primary:hover {
+            background: var(--deep-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245,200,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* === SECTIONS === */
+        section { padding: 5rem 0; }
+
+        .section-label {
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--deep-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.75rem);
+            margin-bottom: 1rem;
+        }
+
+        .section-intro {
+            font-size: 1.1rem;
+            color: var(--stone);
+            max-width: 580px;
+            line-height: 1.7;
+        }
+
+        .section-header { margin-bottom: 3rem; }
+        .section-header.centered { text-align: center; }
+        .section-header.centered .section-intro { margin: 0 auto; }
+
+        /* === UPCOMING WALKS === */
+        .upcoming { background: var(--white); }
+
+        .upcoming-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .walk-card {
+            border: 2px solid var(--soft-gold);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--white);
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .walk-card:hover {
+            box-shadow: 0 10px 28px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+        }
+
+        .walk-card-header {
+            background: var(--black);
+            padding: 1.1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .walk-date {
+            color: var(--gold);
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .walk-edition {
+            color: var(--stone);
+            font-size: 0.78rem;
+            font-family: var(--font-b);
+            white-space: nowrap;
+        }
+
+        .walk-card-body { padding: 1.5rem; }
+
+        .walk-card-body h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .walk-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .walk-meta-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            color: var(--charcoal);
+        }
+
+        .walk-meta-icon { flex-shrink: 0; margin-top: 0.05rem; }
+
+        .walk-distances {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .distance-badge {
+            background: var(--soft-gold);
+            color: var(--charcoal);
+            font-family: var(--font-b);
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 0.22rem 0.65rem;
+            border-radius: 999px;
+        }
+
+        /* === FOUR WALK EVENT CARDS === */
+        .our-walks {
+            background: var(--black);
+            padding: 0;
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3px;
+        }
+
+        .event-card {
+            position: relative;
+            height: 310px;
+            overflow: hidden;
+            display: block;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Per-walk photo backgrounds with gradient overlay */
+        .card-zeehaven {
+            background:
+                linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.05) 45%, rgba(0,0,0,0.68) 100%),
+                url('https://picsum.photos/seed/zeebrugge-harbor-crane/800/500') center/cover no-repeat;
+        }
+        .card-metten {
+            background:
+                linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.05) 45%, rgba(0,0,0,0.68) 100%),
+                url('https://picsum.photos/seed/bruges-medieval-canal/800/500') center/cover no-repeat;
+        }
+        .card-breydel {
+            background:
+                linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.05) 45%, rgba(0,0,0,0.68) 100%),
+                url('https://picsum.photos/seed/bruges-cobblestone-street/800/500') center/cover no-repeat;
+        }
+        .card-arsebrouc {
+            background:
+                linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.05) 45%, rgba(0,0,0,0.68) 100%),
+                url('https://picsum.photos/seed/green-forest-flemish/800/500') center/cover no-repeat;
+        }
+
+        /* Gold hover veil */
+        .event-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: transparent;
+            border-bottom: 4px solid transparent;
+            transition: background 0.25s, border-color 0.25s;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .event-card:hover::before {
+            background: rgba(245,200,0,0.08);
+            border-bottom-color: var(--gold);
+        }
+
+        /* Countdown badge */
+        .countdown-pill {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 3;
+            background: var(--gold);
+            color: var(--black);
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 0.76rem;
+            padding: 0.28rem 0.8rem;
+            border-radius: 999px;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .countdown-pill.tbd { display: none; }
+
+        /* Bottom info bar */
+        .event-card-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 3;
+            background: rgba(0,0,0,0.55);
+            border-top: 3px solid rgba(245,200,0,0.45);
+            border-left: 4px solid var(--gold);
+            padding: 0.85rem 1.1rem 1rem;
+            transition: background 0.22s, border-color 0.22s;
+            backdrop-filter: blur(2px);
+        }
+
+        .event-card:hover .event-card-info {
+            background: rgba(0,0,0,0.7);
+            border-top-color: var(--gold);
+        }
+
+        .event-card-info h3 {
+            color: var(--gold);
+            font-family: var(--font-h);
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0 0 0.25rem;
+            line-height: 1.25;
+        }
+
+        .event-card-meta {
+            color: rgba(255,255,255,0.72);
+            font-family: var(--font-b);
+            font-size: 0.82rem;
+            line-height: 1.4;
+        }
+
+        /* === WALK DETAIL SECTIONS === */
+        .tocht-detail { padding: 4.5rem 0; }
+        .tocht-bg-cream { background: var(--cream); }
+        .tocht-bg-white { background: var(--white); }
+
+        .tocht-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 2px solid var(--soft-gold);
+        }
+
+        .tocht-edition-tag {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--black);
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 0.6rem;
+        }
+
+        .tocht-title {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            color: var(--black);
+        }
+
+        .tocht-main-grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .tocht-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tocht-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: var(--soft-gold);
+            color: var(--charcoal);
+            font-family: var(--font-b);
+            font-weight: 600;
+            font-size: 0.88rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 6px;
+        }
+
+        .tocht-desc p {
+            color: var(--charcoal);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            margin-bottom: 1rem;
+        }
+
+        .tocht-specials { margin-top: 1.75rem; }
+
+        .tocht-specials-label {
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--deep-gold);
+            margin-bottom: 0.65rem;
+        }
+
+        .tocht-special-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--soft-gold);
+            font-size: 0.97rem;
+            color: var(--charcoal);
+        }
+
+        .tocht-special-item:last-child { border-bottom: none; }
+
+        .tocht-sidebar {
+            background: var(--black);
+            border-radius: 12px;
+            padding: 1.75rem;
+            border-left: 4px solid var(--gold);
+            position: sticky;
+            top: 80px;
+        }
+
+        .tocht-sidebar-label {
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-bottom: 0.7rem;
+        }
+
+        .tocht-dist-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dist-pill {
+            background: var(--gold);
+            color: var(--black);
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 0.82rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+        }
+
+        .tocht-key-info {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1.5rem;
+        }
+
+        .key-info-row {
+            display: flex;
+            flex-direction: column;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(245,200,0,0.15);
+        }
+
+        .key-info-row:last-child { border-bottom: none; }
+
+        .key-label {
+            color: var(--gold);
+            font-size: 0.7rem;
+            font-weight: 700;
+            font-family: var(--font-b);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.15rem;
+        }
+
+        .key-value {
+            color: rgba(255,255,255,0.82);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .tocht-ext-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            background: var(--gold);
+            color: var(--black);
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 6px;
+            transition: background 0.18s;
+            width: 100%;
+        }
+
+        .tocht-ext-link:hover { background: var(--deep-gold); }
+
+        /* Logo */
+        .nav-logo-img {
+            height: 38px;
+            width: auto;
+            display: block;
+        }
+
+        .hero-logo {
+            height: 110px;
+            width: auto;
+            margin: 0 auto 1.5rem;
+            display: block;
+            filter: drop-shadow(0 2px 12px rgba(0,0,0,0.5));
+        }
+
+        @media (max-width: 820px) {
+            .tocht-main-grid { grid-template-columns: 1fr; }
+            .tocht-sidebar { position: static; }
+        }
+
+        /* === HISTORY === */
+        .history { background: var(--black); }
+
+        .history .section-label { color: var(--gold); }
+        .history .section-title { color: var(--white); }
+        .history .section-intro { color: var(--stone); }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .history-text p {
+            color: var(--stone);
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+            line-height: 1.75;
+        }
+
+        .history-text p strong { color: var(--gold); font-weight: 700; }
+
+        /* Timeline */
+        .timeline { display: flex; flex-direction: column; }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.25rem;
+            padding-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            bottom: 0;
+            width: 2px;
+            background: rgba(245,200,0,0.2);
+        }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: 700;
+            font-size: 0.65rem;
+            color: var(--black);
+            font-family: var(--font-b);
+            z-index: 1;
+        }
+
+        .timeline-content h4 {
+            color: var(--gold);
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-content p {
+            color: var(--stone);
+            font-size: 0.93rem;
+            line-height: 1.6;
+        }
+
+        /* === MEMBERSHIP === */
+        .membership { background: var(--cream); }
+
+        .membership-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            align-items: start;
+        }
+
+        .membership-info h3,
+        .benefits-col h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .price-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            border: 2px solid var(--soft-gold);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            gap: 1rem;
+        }
+
+        .price-card.highlight {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .price-card-label {
+            font-family: var(--font-b);
+            font-weight: 600;
+            color: var(--charcoal);
+            font-size: 0.98rem;
+        }
+
+        .price-card.highlight .price-card-label { color: var(--black); }
+
+        .price-card-sub {
+            font-size: 0.8rem;
+            color: var(--stone);
+            margin-top: 0.1rem;
+        }
+
+        .price-card.highlight .price-card-sub { color: rgba(0,0,0,0.55); }
+
+        .price-card-price {
+            font-family: var(--font-h);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--deep-gold);
+            white-space: nowrap;
+        }
+
+        .price-card.highlight .price-card-price { color: var(--black); }
+
+        .iban-box {
+            background: var(--soft-gold);
+            border-radius: 8px;
+            padding: 1.1rem 1.25rem;
+        }
+
+        .iban-label {
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--deep-gold);
+            margin-bottom: 0.25rem;
+        }
+
+        .iban-number {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--black);
+            font-family: monospace;
+            letter-spacing: 0.04em;
+        }
+
+        .iban-sub {
+            font-size: 0.82rem;
+            color: var(--stone);
+            margin-top: 0.35rem;
+        }
+
+        .benefits-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .benefits-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 1rem;
+            line-height: 1.55;
+        }
+
+        .benefit-check {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-top: 0.15rem;
+        }
+
+        /* === CONTACT === */
+        .contact { background: var(--white); }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-details { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            background: var(--soft-gold);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .contact-item-label {
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--deep-gold);
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-item p,
+        .contact-item a {
+            color: var(--charcoal);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .contact-item a:hover { color: var(--deep-gold); text-decoration: underline; }
+
+        .contact-board h3 { font-size: 1.4rem; margin-bottom: 1.5rem; }
+
+        .board-member {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.1rem;
+            background: var(--cream);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .board-avatar {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-h);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .board-name {
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--black);
+            margin-bottom: 0.1rem;
+        }
+
+        .board-role {
+            font-size: 0.83rem;
+            color: var(--stone);
+            margin-bottom: 0.35rem;
+        }
+
+        .board-contact { font-size: 0.85rem; color: var(--charcoal); line-height: 1.7; }
+        .board-contact a { color: var(--deep-gold); }
+        .board-contact a:hover { text-decoration: underline; }
+
+        /* === AFFILIATIONS STRIP === */
+        .affiliations {
+            background: var(--soft-gold);
+            padding: 1.5rem 1.5rem;
+            text-align: center;
+        }
+
+        .affiliations p {
+            font-family: var(--font-b);
+            font-size: 0.9rem;
+            color: var(--charcoal);
+        }
+
+        .affiliations strong { color: var(--deep-gold); }
+
+        /* === FOOTER === */
+        footer {
+            background: var(--black);
+            padding: 3.5rem 0 1.5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: var(--font-h);
+            color: var(--gold);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            color: var(--stone);
+            line-height: 1.7;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-b);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+        .footer-col a {
+            color: var(--stone);
+            font-size: 0.9rem;
+            transition: color 0.18s;
+        }
+
+        .footer-col a:hover { color: var(--gold); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: rgba(154,152,144,0.65);
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 820px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            body { font-size: 16px; }
+            section { padding: 3.5rem 0; }
+            .hero { padding: 2rem 1.5rem 1.75rem; }
+            .history-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .membership-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+        }
+
+        @media (max-width: 820px) {
+            .event-grid { grid-template-columns: repeat(2, 1fr); }
+            .event-card { height: 260px; }
+        }
+
+        @media (max-width: 540px) {
+            .event-grid { grid-template-columns: repeat(2, 1fr); }
+            .event-card { height: 220px; }
+            .event-card-info h3 { font-size: 0.88rem; }
+            .event-card-meta { font-size: 0.75rem; }
+            .upcoming-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="#home" class="nav-logo">
+            <!-- Save the club logo as logo.png in the same folder to show it here -->
+            <img src="logo.png" alt="Brugse Metten Wandelclub" class="nav-logo-img" onerror="this.replaceWith(document.createTextNode('🦁'))">
+            Brugse Metten Wandelclub
+        </a>
+        <ul class="nav-links">
+            <li><a href="#tochten">Onze Tochten</a></li>
+            <li><a href="#kalender">Wandelkalender</a></li>
+            <li><a href="#geschiedenis">Geschiedenis</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#lidmaatschap" class="nav-cta">→ Word Lid</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <ul>
+            <li><a href="#tochten">Onze Tochten</a></li>
+            <li><a href="#kalender">Wandelkalender</a></li>
+            <li><a href="#geschiedenis">Geschiedenis</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#lidmaatschap" class="nav-cta">→ Word Lid</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ALERT: next event -->
+<div class="alert-banner">
+    🥾&nbsp; <strong>24ste Brugse Metten Wandeltocht</strong> — maandag 25 mei &nbsp;·&nbsp; OLVA Brugge &nbsp;·&nbsp; 4 tot 32 km &nbsp;&nbsp;
+    <a href="#kalender">Meer info →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="hero-bg-text" aria-hidden="true">1302</div>
+    <div class="hero-content">
+        <!-- Save the club logo as logo.png in the same folder -->
+        <img src="logo.png" alt="Brugse Metten Wandelclub" class="hero-logo" onerror="this.style.display='none'">
+        <div class="hero-badge">🏅 Wandelclub voor jong en oud &nbsp;·&nbsp; Opgericht 2002</div>
+        <h1>Brugse Metten<br><span>Wandelclub</span></h1>
+        <p class="hero-sub">
+            25 jaar wandelplezier in het hart van Brugge. Vier unieke wandeltochten, een hechte gemeenschap en de mooiste routes door de Vlaamse regio.
+        </p>
+        <div class="hero-cta">
+            <a href="#lidmaatschap" class="btn btn-primary">Word Lid →</a>
+            <a href="#tochten" class="btn btn-secondary">Bekijk tochten</a>
+        </div>
+    </div>
+</section>
+
+<!-- ONZE VIER TOCHTEN -->
+<section class="our-walks" id="tochten">
+    <div class="event-grid">
+
+        <!-- CARD 1: Zeehaven Brugge -->
+        <a href="#detail-zeehaven" class="event-card card-zeehaven">
+            <div class="countdown-pill tbd">Datum volgt</div>
+            <div class="event-card-info">
+                <h3>Zeehaven Brugge</h3>
+                <div class="event-card-meta">Zeebrugge · Haven &amp; zee · Datum volgt</div>
+            </div>
+        </a>
+
+        <!-- CARD 2: Brugse Metten Wandeltocht -->
+        <a href="#detail-metten" class="event-card card-metten">
+            <div class="countdown-pill" data-date="2026-05-25">Laden…</div>
+            <div class="event-card-info">
+                <h3>24ste Brugse Metten</h3>
+                <div class="event-card-meta">OLVA · 4 tot 32 km · ma 25 mei</div>
+            </div>
+        </a>
+
+        <!-- CARD 3: Breydel en De Coninck -->
+        <a href="#detail-breydel" class="event-card card-breydel">
+            <div class="countdown-pill" data-date="2026-07-11">Laden…</div>
+            <div class="event-card-info">
+                <h3>Breydel &amp; De Coninck</h3>
+                <div class="event-card-meta">Barrièrestraat · 5–19 km · za 11 jul</div>
+            </div>
+        </a>
+
+        <!-- CARD 4: Arsebrouc -->
+        <a href="#detail-arsebrouc" class="event-card card-arsebrouc">
+            <div class="countdown-pill" data-date="2026-09-19">Laden…</div>
+            <div class="event-card-info">
+                <h3>43ste Arsebrouc</h3>
+                <div class="event-card-meta">Sparrenhof · 4–22 km · za 19 sep</div>
+            </div>
+        </a>
+
+    </div>
+</section>
+
+<!-- WANDELKALENDER -->
+<section class="upcoming" id="kalender">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Wandelkalender 2026</div>
+            <h2 class="section-title">Aankomende tochten</h2>
+            <p class="section-intro">Onze club organiseert jaarlijks vier erkende wandeltochten in en rond Brugge. Iedereen welkom — leden én niet-leden.</p>
+        </div>
+        <div class="upcoming-grid">
+
+            <div class="walk-card">
+                <div class="walk-card-header">
+                    <span class="walk-date">Maandag 25 mei 2026</span>
+                    <span class="walk-edition">24ste editie</span>
+                </div>
+                <div class="walk-card-body">
+                    <h3>Brugse Metten Wandeltocht</h3>
+                    <div class="walk-meta">
+                        <div class="walk-meta-item">
+                            <span class="walk-meta-icon">📍</span>
+                            <span>OLVA — Onze-Lieve-Vrouwecollege, Brugge</span>
+                        </div>
+                        <div class="walk-meta-item">
+                            <span class="walk-meta-icon">🗺️</span>
+                            <span>Tochten van 4 tot 32 km</span>
+                        </div>
+                    </div>
+                    <div class="walk-distances">
+                        <span class="distance-badge">4 km</span>
+                        <span class="distance-badge">7 km</span>
+                        <span class="distance-badge">12 km</span>
+                        <span class="distance-badge">20 km</span>
+                        <span class="distance-badge">32 km</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="walk-card">
+                <div class="walk-card-header">
+                    <span class="walk-date">Zaterdag 11 juli 2026</span>
+                    <span class="walk-edition">23ste editie</span>
+                </div>
+                <div class="walk-card-body">
+                    <h3>Breydel en De Coninck Wandeling</h3>
+                    <div class="walk-meta">
+                        <div class="walk-meta-item">
+                            <span class="walk-meta-icon">📍</span>
+                            <span>Barrièrestraat, Brugge</span>
+                        </div>
+                        <div class="walk-meta-item">
+                            <span class="walk-meta-icon">🗺️</span>
+                            <span>Tochten van 5 tot 19 km</span>
+                        </div>
+                    </div>
+                    <div class="walk-distances">
+                        <span class="distance-badge">5 km</span>
+                        <span class="distance-badge">10 km</span>
+                        <span class="distance-badge">15 km</span>
+                        <span class="distance-badge">19 km</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="walk-card">
+                <div class="walk-card-header">
+                    <span class="walk-date">Zaterdag 19 september 2026</span>
+                    <span class="walk-edition">43ste editie</span>
+                </div>
+                <div class="walk-card-body">
+                    <h3>Arsebrouc Wandeling</h3>
+                    <div class="walk-meta">
+                        <div class="walk-meta-item">
+                            <span class="walk-meta-icon">📍</span>
+                            <span>Ontmoetingscentrum Sparrenhof, Assebroek</span>
+                        </div>
+                        <div class="walk-meta-item">
+                            <span class="walk-meta-icon">🗺️</span>
+                            <span>Tochten van 4 tot 22 km</span>
+                        </div>
+                    </div>
+                    <div class="walk-distances">
+                        <span class="distance-badge">4 km</span>
+                        <span class="distance-badge">8 km</span>
+                        <span class="distance-badge">12 km</span>
+                        <span class="distance-badge">18 km</span>
+                        <span class="distance-badge">22 km</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- DETAIL: ZEEHAVEN BRUGGE -->
+<section class="tocht-detail tocht-bg-cream" id="detail-zeehaven">
+    <div class="container">
+        <div class="tocht-header">
+            <div class="tocht-edition-tag">19de editie · Paaszaterdag · Sinds 2007</div>
+            <h2 class="tocht-title">Zeehaven Brugge Wandeling</h2>
+        </div>
+        <div class="tocht-main-grid">
+            <div class="tocht-desc">
+                <div class="tocht-chips">
+                    <span class="tocht-chip">📅 Zaterdag 4 april 2026</span>
+                    <span class="tocht-chip">🕗 8u00 – 15u00</span>
+                    <span class="tocht-chip">📍 Ploegstraat 38, Zeebrugge</span>
+                </div>
+                <p>Een gevarieerde tocht door oud-Zeebrugge, langs de marina, de zeedijk, de vismijn en het natuurdomein. Met een lus richting Heist voor de langere afstanden.</p>
+                <p>Deze haventocht werd gelanceerd in 2007 ter ere van het eeuwfeest van de Zeebrugse haven. Het industriële en maritieme landschap zorgt voor een uniek wandeldecor dat je nergens anders vindt — ideaal voor gezinnen, vrienden en wandelaars van alle leeftijden.</p>
+                <div class="tocht-specials">
+                    <div class="tocht-specials-label">Bijzonderheden</div>
+                    <div class="tocht-special-item"><span>🐣</span><span>De paashaas deelt eieren uit aan alle wandelaars</span></div>
+                    <div class="tocht-special-item"><span>🍺</span><span>Na afloop: scholfilet met het lokale biertje "De Paljas"</span></div>
+                    <div class="tocht-special-item"><span>🎣</span><span>Route langs de vismijn en de zeedijk van Zeebrugge</span></div>
+                </div>
+            </div>
+            <div class="tocht-sidebar">
+                <div class="tocht-sidebar-label">Afstanden</div>
+                <div class="tocht-dist-row">
+                    <span class="dist-pill">5 km</span>
+                    <span class="dist-pill">6 km</span>
+                    <span class="dist-pill">10 km</span>
+                    <span class="dist-pill">16 km</span>
+                    <span class="dist-pill">22 km</span>
+                </div>
+                <div class="tocht-key-info">
+                    <div class="key-info-row">
+                        <span class="key-label">Startplaats</span>
+                        <span class="key-value">VTI Zeebrugge Havenschool</span>
+                    </div>
+                    <div class="key-info-row">
+                        <span class="key-label">Adres</span>
+                        <span class="key-value">Ploegstraat 38, Zeebrugge</span>
+                    </div>
+                    <div class="key-info-row">
+                        <span class="key-label">Inschrijving</span>
+                        <span class="key-value">8u00 – 15u00</span>
+                    </div>
+                    <div class="key-info-row">
+                        <span class="key-label">Datum</span>
+                        <span class="key-value">Jaarlijks op Paaszaterdag</span>
+                    </div>
+                </div>
+                <a href="https://www.brugse-metten-wandelclub.be/zeebrugge" target="_blank" rel="noopener" class="tocht-ext-link">Officiële pagina →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DETAIL: BRUGSE METTEN WANDELTOCHT -->
+<section class="tocht-detail tocht-bg-white" id="detail-metten">
+    <div class="container">
+        <div class="tocht-header">
+            <div class="tocht-edition-tag">24ste editie · 11 juli · Sinds 2002</div>
+            <h2 class="tocht-title">Brugse Metten Wandeltocht</h2>
+        </div>
+        <div class="tocht-main-grid">
+            <div class="tocht-desc">
+                <div class="tocht-chips">
+                    <span class="tocht-chip">📅 Maandag 25 mei 2026</span>
+                    <span class="tocht-chip">📍 OLVA, Brugge</span>
+                </div>
+                <p>Onze naamgevende tocht, ter herdenking van de historische Brugse Metten van 1302 — de nacht van 18 mei, waarop de Vlaamse burgers van Brugge de Franse bezetting verjoegen. Een wandeling met historische diepgang in een unieke omgeving.</p>
+                <p>Met het ruimste aanbod aan afstanden biedt deze tocht iets voor elke wandelaar: van een familievriendelijke 4 km tot een uitdagende 32 km voor de doorgewinterde stappers. De routes voeren je door het historische Brugge en het omliggende poldergebied.</p>
+                <div class="tocht-specials">
+                    <div class="tocht-specials-label">Bijzonderheden</div>
+                    <div class="tocht-special-item"><span>🏛️</span><span>Georganiseerd rond 11 juli, de Vlaamse feestdag</span></div>
+                    <div class="tocht-special-item"><span>🗺️</span><span>5 verschillende afstanden voor elk niveau</span></div>
+                    <div class="tocht-special-item"><span>🎖️</span><span>Erkende tocht bij Wandelsport Vlaanderen</span></div>
+                </div>
+            </div>
+            <div class="tocht-sidebar">
+                <div class="tocht-sidebar-label">Afstanden</div>
+                <div class="tocht-dist-row">
+                    <span class="dist-pill">4 km</span>
+                    <span class="dist-pill">7 km</span>
+                    <span class="dist-pill">12 km</span>
+                    <span class="dist-pill">20 km</span>
+                    <span class="dist-pill">32 km</span>
+                </div>
+                <div class="tocht-key-info">
+                    <div class="key-info-row">
+                        <span class="key-label">Startplaats</span>
+                        <span class="key-value">OLVA — Onze-Lieve-Vrouwecollege</span>
+                    </div>
+                    <div class="key-info-row">
+                        <span class="key-label">Gemeente</span>
+                        <span class="key-value">Brugge</span>
+                    </div>
+                    <div class="key-info-row">
+                        <span class="key-label">Datum 2026</span>
+                        <span class="key-value">Maandag 25 mei 2026</span>
+                    </div>
+                </div>
+                <a href="https://www.brugse-metten-wandelclub.be/blank" target="_blank" rel="noopener" class="tocht-ext-link">Officiële pagina →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DETAIL: BREYDEL EN DE CONINCK -->
+<section class="tocht-detail tocht-bg-cream" id="detail-breydel">
+    <div class="container">
+        <div class="tocht-header">
+            <div class="tocht-edition-tag">23ste editie · Guldensporenvieringen · Sinds 2003</div>
+            <h2 class="tocht-title">Breydel en De Coninck Wandeling</h2>
+        </div>
+        <div class="tocht-main-grid">
+            <div class="tocht-desc">
+                <div class="tocht-chips">
+                    <span class="tocht-chip">📅 Zaterdag 11 juli 2026</span>
+                    <span class="tocht-chip">📍 Barrièrestraat, Brugge</span>
+                </div>
+                <p>Een vernieuwde wandeltocht in het groene hinterland van Brugge, langs het domein Koude Keuken. De route biedt een rustige doortocht zowel binnen als buiten de stadswallen — een mooie combinatie van natuur en stedelijke erfgoedplekken.</p>
+                <p>Ter ere van de Vlaamse volkshelden Jan Breydel en Pieter de Coninck, die op 11 juli 1302 de Franse ridders versloegen bij de Guldensporenslag. Georganiseerd op de Vlaamse feestdag als hommage aan de Vlaamse identiteit en vrijheidsgeest.</p>
+                <div class="tocht-specials">
+                    <div class="tocht-specials-label">Bijzonderheden</div>
+                    <div class="tocht-special-item"><span>⚔️</span><span>Georganiseerd op 11 juli, dag van de Guldensporenslag (1302)</span></div>
+                    <div class="tocht-special-item"><span>🌳</span><span>Route langs domein Koude Keuken, binnen en buiten de stadswallen</span></div>
+                    <div class="tocht-special-item"><span>🏙️</span><span>Combinatie van natuur en historisch Brugge</span></div>
+                </div>
+            </div>
+            <div class="tocht-sidebar">
+                <div class="tocht-sidebar-label">Afstanden</div>
+                <div class="tocht-dist-row">
+                    <span class="dist-pill">5 km</span>
+                    <span class="dist-pill">10 km</span>
+                    <span class="dist-pill">15 km</span>
+                    <span class="dist-pill">19 km</span>
+                </div>
+                <div class="tocht-key-info">
+                    <div class="key-info-row">
+                        <span class="key-label">Startplaats</span>
+                        <span class="key-value">Barrièrestraat, Brugge</span>
+                    </div>
+                    <div class="key-info-row">
+                        <span class="key-label">Datum 2026</span>
+                        <span class="key-value">Zaterdag 11 juli 2026</span>
+                    </div>
+                    <div class="key-info-row">
+                        <span class="key-label">Omgeving</span>
+                        <span class="key-value">Groen Brugge · Domein Koude Keuken</span>
+                    </div>
+                </div>
+                <a href="https://www.brugse-metten-wandelclub.be/blank-4" target="_blank" rel="noopener" class="tocht-ext-link">Officiële pagina →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DETAIL: ARSEBROUC WANDELING -->
+<section class="tocht-detail tocht-bg-white" id="detail-arsebrouc">
+    <div class="container">
+        <div class="tocht-header">
+            <div class="tocht-edition-tag">43ste editie · Traditie sinds 1982</div>
+            <h2 class="tocht-title">Arsebrouc Wandeling</h2>
+        </div>
+        <div class="tocht-main-grid">
+            <div class="tocht-desc">
+                <div class="tocht-chips">
+                    <span class="tocht-chip">📅 Zaterdag 19 september 2026</span>
+                    <span class="tocht-chip">📍 Ontmoetingscentrum Sparrenhof, Assebroek</span>
+                </div>
+                <p>Een heerlijke wandeling langs het tracé van de oude spoorwegbedding, door het rustige en prachtige natuurgebied "de Assebroekse Meersen", met uitlopers in en rond het domein Ryckevelde.</p>
+                <p>De oudste tocht in ons aanbod — een traditie die teruggaat tot 1982, toen ze werd georganiseerd door "De Roas Stappers" uit Assebroek. In 2008 nam de Brugse Metten Wandelclub de fakkel over en blaast de tocht elk jaar nieuw leven in.</p>
+                <div class="tocht-specials">
+                    <div class="tocht-specials-label">Bijzonderheden</div>
+                    <div class="tocht-special-item"><span>🌿</span><span>Langs de Assebroekse Meersen — een waardevol natuurgebied</span></div>
+                    <div class="tocht-special-item"><span>🚂</span><span>Route langs de oude spoorwegbedding van Assebroek</span></div>
+                    <div class="tocht-special-item"><span>🌲</span><span>Uitlopers door het bosrijke domein Ryckevelde</span></div>
+                    <div class="tocht-special-item"><span>📅</span><span>Traditie met meer dan 40 jaar geschiedenis</span></div>
+                </div>
+            </div>
+            <div class="tocht-sidebar">
+                <div class="tocht-sidebar-label">Afstanden</div>
+                <div class="tocht-dist-row">
+                    <span class="dist-pill">4 km</span>
+                    <span class="dist-pill">8 km</span>
+                    <span class="dist-pill">12 km</span>
+                    <span class="dist-pill">18 km</span>
+                    <span class="dist-pill">22 km</span>
+                </div>
+                <div class="tocht-key-info">
+                    <div class="key-info-row">
+                        <span class="key-label">Startplaats</span>
+                        <span class="key-value">Ontmoetingscentrum Sparrenhof</span>
+                    </div>
+                    <div class="key-info-row">
+                        <span class="key-label">Gemeente</span>
+                        <span class="key-value">Assebroek (Brugge)</span>
+                    </div>
+                    <div class="key-info-row">
+                        <span class="key-label">Datum 2026</span>
+                        <span class="key-value">Zaterdag 19 september 2026</span>
+                    </div>
+                    <div class="key-info-row">
+                        <span class="key-label">Omgeving</span>
+                        <span class="key-value">Assebroekse Meersen · Domein Ryckevelde</span>
+                    </div>
+                </div>
+                <a href="https://www.brugse-metten-wandelclub.be/blank-5" target="_blank" rel="noopener" class="tocht-ext-link">Officiële pagina →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GESCHIEDENIS -->
+<section class="history" id="geschiedenis">
+    <div class="container">
+        <div class="history-grid">
+            <div class="history-text">
+                <div class="section-label">Ons verhaal</div>
+                <h2 class="section-title" style="color:var(--white);">25 jaar wandelen<br>met hart en ziel</h2>
+                <p>De Brugse Metten Wandelclub vindt haar roots in <strong>1977</strong>, toen de stad Brugge de allereerste Brugse Mettentocht organiseerde als onderdeel van de 11 juli-vieringen. Ongeveer 100 deelnemers trokken dat eerste jaar de straat op.</p>
+                <p>Na 24 edities liep de tocht in 2000 ten einde. Maar in <strong>2002</strong> nam een enthousiaste groep wandelaars — grotendeels leden van de Internationale Guldensporenmars — het heft in handen en richtte officieel de Brugse Metten Wandelclub op.</p>
+                <p>De eerste tocht vond plaats op <strong>18 mei 2002</strong> — precies 700 jaar na de historische Brugse Metten van 1302. Sindsdien groeide de club uit tot een hechte gemeenschap met vier jaarlijkse tochten en honderden trouwe leden.</p>
+                <p>Op <strong>9 juni 2016</strong> verwierf de club officieel de vzw-status, onder ondernemingsnummer 0656 525 593.</p>
+                <a href="#lidmaatschap" class="btn btn-primary" style="margin-top:0.5rem;">Word ook lid →</a>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot">1977</div>
+                    <div class="timeline-content">
+                        <h4>De eerste Brugse Mettentocht</h4>
+                        <p>Georganiseerd door het 11 Juli Comité van Brugge. Circa 100 deelnemers namen deel aan de allereerste editie.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2002</div>
+                    <div class="timeline-content">
+                        <h4>Oprichting van de club</h4>
+                        <p>Denis Vermeire wordt eerste voorzitter. Aansluiting bij de Vlaamse wandel- en joggingliga, lidnummer 429.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2003</div>
+                    <div class="timeline-content">
+                        <h4>Breydel en De Coninck toegevoegd</h4>
+                        <p>De tweede wandeltocht wordt aan het programma toegevoegd.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2007</div>
+                    <div class="timeline-content">
+                        <h4>Zeehaven Brugge Wandeling</h4>
+                        <p>Gelanceerd ter ere van het eeuwfeest van de Zeebrugse haven. Joël Boussemaere wordt voorzitter.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2008</div>
+                    <div class="timeline-content">
+                        <h4>Arsebrouctocht erbij</h4>
+                        <p>Overname van "De Roas Stappers" uit Assebroek, inclusief de Arsebrouctocht — die al sinds 1982 bestaat.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2016</div>
+                    <div class="timeline-content">
+                        <h4>Officiële vzw-status</h4>
+                        <p>Erkend als vzw op 9 juni 2016. Ondernemingsnummer 0656 525 593.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LIDMAATSCHAP -->
+<section class="membership" id="lidmaatschap">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label">Lidmaatschap 2026</div>
+            <h2 class="section-title">Word lid van de club</h2>
+            <p class="section-intro">Geen verplichtingen — leden zijn vrij om te wandelen waar en wanneer ze willen. Geldig tot en met december 2026.</p>
+        </div>
+        <div class="membership-grid">
+            <div class="membership-info">
+                <h3>Lidgeld</h3>
+                <div class="price-cards">
+                    <div class="price-card highlight">
+                        <div>
+                            <div class="price-card-label">1ste en 2de gezinslid</div>
+                            <div class="price-card-sub">Per persoon, zelfde adres</div>
+                        </div>
+                        <div class="price-card-price">€20</div>
+                    </div>
+                    <div class="price-card">
+                        <div>
+                            <div class="price-card-label">3de en volgende gezinsleden</div>
+                            <div class="price-card-sub">Zelfde adres</div>
+                        </div>
+                        <div class="price-card-price">€15</div>
+                    </div>
+                    <div class="price-card">
+                        <div>
+                            <div class="price-card-label">Kinderen t.e.m. 12 jaar</div>
+                            <div class="price-card-sub">Bij inschrijving van een gezinslid</div>
+                        </div>
+                        <div class="price-card-price">Gratis</div>
+                    </div>
+                </div>
+                <div class="iban-box">
+                    <div class="iban-label">Storting lidgeld via overschrijving</div>
+                    <div class="iban-number">BE53 7775 9587 8453</div>
+                    <div class="iban-sub">Vermeld naam, adres en geboortedatum als mededeling</div>
+                </div>
+            </div>
+            <div class="benefits-col">
+                <h3>Voordelen voor leden</h3>
+                <ul class="benefits-list">
+                    <li>
+                        <span class="benefit-check">✓</span>
+                        <span>Verzekering op officiële wandeltochten en georganiseerde reizen</span>
+                    </li>
+                    <li>
+                        <span class="benefit-check">✓</span>
+                        <span>Gratis deelname aan de 4 jaarlijkse clubtochten</span>
+                    </li>
+                    <li>
+                        <span class="benefit-check">✓</span>
+                        <span>Verminderd inschrijvingsgeld op andere erkende wandeltochten</span>
+                    </li>
+                    <li>
+                        <span class="benefit-check">✓</span>
+                        <span>Tweemaandelijks clubblad gratis in de bus</span>
+                    </li>
+                    <li>
+                        <span class="benefit-check">✓</span>
+                        <span>Maandelijkse bonuswandeling via voucher</span>
+                    </li>
+                    <li>
+                        <span class="benefit-check">✓</span>
+                        <span>Gratis Wandelmagazine (5 nummers per jaar)</span>
+                    </li>
+                    <li>
+                        <span class="benefit-check">✓</span>
+                        <span>Wijn of biofruitensap op basis van wandelprestaties</span>
+                    </li>
+                    <li>
+                        <span class="benefit-check">✓</span>
+                        <span>Terugbetalingsattest voor de mutualiteit</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+    <div class="container">
+        <div class="contact-grid">
+            <div>
+                <div class="section-label">Neem contact op</div>
+                <h2 class="section-title">We wandelen graag<br>met u mee</h2>
+                <p class="section-intro" style="margin-bottom:2rem;">Vragen over lidmaatschap, tochten of de club? Aarzel niet om contact op te nemen.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <div class="contact-item-label">Algemeen contact</div>
+                            <a href="mailto:Bart.Denduyver@telenet.be">Bart.Denduyver@telenet.be</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📘</div>
+                        <div>
+                            <div class="contact-item-label">Facebook</div>
+                            <a href="https://www.facebook.com/BrugseMetten1302" target="_blank" rel="noopener noreferrer">BrugseMetten1302</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🏛️</div>
+                        <div>
+                            <div class="contact-item-label">Vzw-gegevens</div>
+                            <p>Brugse Metten Wandelclub vzw<br>Ondernemingsnummer 0656 525 593</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🥾</div>
+                        <div>
+                            <div class="contact-item-label">Erkend door</div>
+                            <p>Wandelsport Vlaanderen · wandel.be<br>Lidnummer 429</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-board">
+                <h3>Bestuur</h3>
+                <div class="board-member">
+                    <div class="board-avatar">AM</div>
+                    <div>
+                        <div class="board-name">Aagje Merlevede</div>
+                        <div class="board-role">Voorzitter</div>
+                        <div class="board-contact">
+                            <a href="mailto:aagje.merlevede@telenet.be">aagje.merlevede@telenet.be</a><br>
+                            <a href="tel:+32468184486">0468 18 44 86</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="board-member">
+                    <div class="board-avatar">HD</div>
+                    <div>
+                        <div class="board-name">Hilde De Herdt</div>
+                        <div class="board-role">Secretaris · Ledencoördinator</div>
+                        <div class="board-contact">
+                            <a href="mailto:hildebrugsemettenwandelclub@gmail.com">hildebrugsemettenwandelclub@gmail.com</a><br>
+                            <a href="tel:+3250344139">050/34 41 39</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AFFILIATIONS STRIP -->
+<div class="affiliations">
+    <div class="container">
+        <p>
+            Trots aangesloten bij <strong>Wandelsport Vlaanderen</strong> en <strong>wandel.be</strong>
+            &nbsp;·&nbsp; Lidnummer <strong>429</strong>
+            &nbsp;·&nbsp; vzw-ondernemingsnummer <strong>0656 525 593</strong>
+        </p>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>🦁 Brugse Metten Wandelclub</h3>
+                <p>Een wandelclub voor jong en oud, verankerd in de Vlaamse tradities van Brugge. Opgericht in 2002, erkend als vzw op 9 juni 2016. Vier jaarlijkse wandeltochten in en rond Brugge.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Wandeltochten</h4>
+                <ul>
+                    <li><a href="#tochten">Brugse Metten Wandeltocht</a></li>
+                    <li><a href="#tochten">Breydel en De Coninck</a></li>
+                    <li><a href="#tochten">Zeehaven Brugge</a></li>
+                    <li><a href="#tochten">Arsebrouc Wandeling</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Club</h4>
+                <ul>
+                    <li><a href="#geschiedenis">Geschiedenis</a></li>
+                    <li><a href="#lidmaatschap">Word Lid</a></li>
+                    <li><a href="#kalender">Wandelkalender</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="https://www.facebook.com/BrugseMetten1302" target="_blank" rel="noopener noreferrer">📘 Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Brugse Metten Wandelclub vzw · Alle rechten voorbehouden</p>
+            <p>Privacybeleid</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    /* Hamburger menu toggle */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+        const open = hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', open);
+        mobileMenu.setAttribute('aria-hidden', !open);
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+        });
+    });
+
+    /* Countdown badges */
+    document.querySelectorAll('.countdown-pill[data-date]').forEach(pill => {
+        const target = new Date(pill.dataset.date);
+        target.setHours(0, 0, 0, 0);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const days = Math.round((target - today) / 86400000);
+        if (days < 0) {
+            pill.textContent = 'Voorbij';
+            pill.classList.add('tbd');
+        } else if (days === 0) {
+            pill.textContent = 'Vandaag!';
+        } else if (days === 1) {
+            pill.textContent = 'Morgen!';
+        } else {
+            pill.textContent = `Nog ${days} dagen`;
+        }
+    });
+
+    /* Active nav link on scroll */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                navLinks.forEach(link => {
+                    const matches = link.getAttribute('href') === '#' + id;
+                    link.classList.toggle('active', matches);
+                });
+            }
+        });
+    }, { threshold: 0.35 });
+
+    sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

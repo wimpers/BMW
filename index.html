@@ -727,12 +727,30 @@
             display: block;
         }
 
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
         .hero-logo {
-            height: 110px;
+            height: clamp(8rem, 20vw, 18rem);
             width: auto;
-            margin: 0 auto 1.5rem;
             display: block;
+            flex-shrink: 0;
+            margin-left: 4rem;
             filter: drop-shadow(0 2px 12px rgba(0,0,0,0.5));
+        }
+
+        @media (max-width: 820px) {
+            .hero-logo { display: none; }
+            .hero-inner { justify-content: center; }
         }
 
         @media (max-width: 820px) {
@@ -1145,8 +1163,7 @@
 <nav id="navbar">
     <div class="nav-inner">
         <a href="#home" class="nav-logo">
-            <!-- Save the club logo as logo.png in the same folder to show it here -->
-            <img src="logo.png" alt="Brugse Metten Wandelclub" class="nav-logo-img" onerror="this.replaceWith(document.createTextNode('🦁'))">
+            <span class="nav-logo-icon">🦁</span>
             Brugse Metten Wandelclub
         </a>
         <ul class="nav-links">
@@ -1180,18 +1197,16 @@
 <!-- HERO -->
 <section class="hero" id="home">
     <div class="hero-bg-text" aria-hidden="true">1302</div>
+    <div class="hero-inner">
+    <!-- Save the club logo as logo.png in the same folder -->
+    <img src="logo.png" alt="Brugse Metten Wandelclub" class="hero-logo" onerror="this.style.display='none'">
     <div class="hero-content">
-        <!-- Save the club logo as logo.png in the same folder -->
-        <img src="logo.png" alt="Brugse Metten Wandelclub" class="hero-logo" onerror="this.style.display='none'">
         <div class="hero-badge">🏅 Wandelclub voor jong en oud &nbsp;·&nbsp; Opgericht 2002</div>
         <h1>Brugse Metten<br><span>Wandelclub</span></h1>
         <p class="hero-sub">
             25 jaar wandelplezier in het hart van Brugge. Vier unieke wandeltochten, een hechte gemeenschap en de mooiste routes door de Vlaamse regio.
         </p>
-        <div class="hero-cta">
-            <a href="#lidmaatschap" class="btn btn-primary">Word Lid →</a>
-            <a href="#tochten" class="btn btn-secondary">Bekijk tochten</a>
-        </div>
+    </div>
     </div>
 </section>
 
@@ -1238,99 +1253,6 @@
     </div>
 </section>
 
-<!-- WANDELKALENDER -->
-<section class="upcoming" id="kalender">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-label">Wandelkalender 2026</div>
-            <h2 class="section-title">Aankomende tochten</h2>
-            <p class="section-intro">Onze club organiseert jaarlijks vier erkende wandeltochten in en rond Brugge. Iedereen welkom — leden én niet-leden.</p>
-        </div>
-        <div class="upcoming-grid">
-
-            <div class="walk-card">
-                <div class="walk-card-header">
-                    <span class="walk-date">Maandag 25 mei 2026</span>
-                    <span class="walk-edition">24ste editie</span>
-                </div>
-                <div class="walk-card-body">
-                    <h3>Brugse Metten Wandeltocht</h3>
-                    <div class="walk-meta">
-                        <div class="walk-meta-item">
-                            <span class="walk-meta-icon">📍</span>
-                            <span>OLVA — Onze-Lieve-Vrouwecollege, Brugge</span>
-                        </div>
-                        <div class="walk-meta-item">
-                            <span class="walk-meta-icon">🗺️</span>
-                            <span>Tochten van 4 tot 32 km</span>
-                        </div>
-                    </div>
-                    <div class="walk-distances">
-                        <span class="distance-badge">4 km</span>
-                        <span class="distance-badge">7 km</span>
-                        <span class="distance-badge">12 km</span>
-                        <span class="distance-badge">20 km</span>
-                        <span class="distance-badge">32 km</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="walk-card">
-                <div class="walk-card-header">
-                    <span class="walk-date">Zaterdag 11 juli 2026</span>
-                    <span class="walk-edition">23ste editie</span>
-                </div>
-                <div class="walk-card-body">
-                    <h3>Breydel en De Coninck Wandeling</h3>
-                    <div class="walk-meta">
-                        <div class="walk-meta-item">
-                            <span class="walk-meta-icon">📍</span>
-                            <span>Barrièrestraat, Brugge</span>
-                        </div>
-                        <div class="walk-meta-item">
-                            <span class="walk-meta-icon">🗺️</span>
-                            <span>Tochten van 5 tot 19 km</span>
-                        </div>
-                    </div>
-                    <div class="walk-distances">
-                        <span class="distance-badge">5 km</span>
-                        <span class="distance-badge">10 km</span>
-                        <span class="distance-badge">15 km</span>
-                        <span class="distance-badge">19 km</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="walk-card">
-                <div class="walk-card-header">
-                    <span class="walk-date">Zaterdag 19 september 2026</span>
-                    <span class="walk-edition">43ste editie</span>
-                </div>
-                <div class="walk-card-body">
-                    <h3>Arsebrouc Wandeling</h3>
-                    <div class="walk-meta">
-                        <div class="walk-meta-item">
-                            <span class="walk-meta-icon">📍</span>
-                            <span>Ontmoetingscentrum Sparrenhof, Assebroek</span>
-                        </div>
-                        <div class="walk-meta-item">
-                            <span class="walk-meta-icon">🗺️</span>
-                            <span>Tochten van 4 tot 22 km</span>
-                        </div>
-                    </div>
-                    <div class="walk-distances">
-                        <span class="distance-badge">4 km</span>
-                        <span class="distance-badge">8 km</span>
-                        <span class="distance-badge">12 km</span>
-                        <span class="distance-badge">18 km</span>
-                        <span class="distance-badge">22 km</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
 
 <!-- DETAIL: ZEEHAVEN BRUGGE -->
 <section class="tocht-detail tocht-bg-cream" id="detail-zeehaven">
@@ -1382,7 +1304,6 @@
                         <span class="key-value">Jaarlijks op Paaszaterdag</span>
                     </div>
                 </div>
-                <a href="https://www.brugse-metten-wandelclub.be/zeebrugge" target="_blank" rel="noopener" class="tocht-ext-link">Officiële pagina →</a>
             </div>
         </div>
     </div>
@@ -1392,22 +1313,25 @@
 <section class="tocht-detail tocht-bg-white" id="detail-metten">
     <div class="container">
         <div class="tocht-header">
-            <div class="tocht-edition-tag">24ste editie · 11 juli · Sinds 2002</div>
-            <h2 class="tocht-title">Brugse Metten Wandeltocht</h2>
+            <div class="tocht-edition-tag">24ste editie · Maandag 25 mei · Sinds 2002</div>
+            <h2 class="tocht-title">24e Brugse Metten Wandeltocht</h2>
         </div>
         <div class="tocht-main-grid">
             <div class="tocht-desc">
                 <div class="tocht-chips">
                     <span class="tocht-chip">📅 Maandag 25 mei 2026</span>
-                    <span class="tocht-chip">📍 OLVA, Brugge</span>
+                    <span class="tocht-chip">🕗 08.00 – 15.00</span>
+                    <span class="tocht-chip">📍 Collegestraat 24, 8310 Assebroek</span>
                 </div>
                 <p>Onze naamgevende tocht, ter herdenking van de historische Brugse Metten van 1302 — de nacht van 18 mei, waarop de Vlaamse burgers van Brugge de Franse bezetting verjoegen. Een wandeling met historische diepgang in een unieke omgeving.</p>
-                <p>Met het ruimste aanbod aan afstanden biedt deze tocht iets voor elke wandelaar: van een familievriendelijke 4 km tot een uitdagende 32 km voor de doorgewinterde stappers. De routes voeren je door het historische Brugge en het omliggende poldergebied.</p>
+                <p>Volledig nieuw parcours door Koolkerke en Sint-Kruis, langs het Fort van Beieren en de Damse Vaart. Extra lus van 5 km in Koolkerke.</p>
+                <p>Geniet achteraf van een streekbiertje Viven.</p>
                 <div class="tocht-specials">
                     <div class="tocht-specials-label">Bijzonderheden</div>
-                    <div class="tocht-special-item"><span>🏛️</span><span>Georganiseerd rond 11 juli, de Vlaamse feestdag</span></div>
-                    <div class="tocht-special-item"><span>🗺️</span><span>5 verschillende afstanden voor elk niveau</span></div>
-                    <div class="tocht-special-item"><span>🎖️</span><span>Erkende tocht bij Wandelsport Vlaanderen</span></div>
+                    <div class="tocht-special-item"><span>🗺️</span><span>Volledig nieuw parcours door Koolkerke en Sint-Kruis</span></div>
+                    <div class="tocht-special-item"><span>🏰</span><span>Langs het Fort van Beieren en de Damse Vaart</span></div>
+                    <div class="tocht-special-item"><span>➕</span><span>Extra lus van 5 km in Koolkerke</span></div>
+                    <div class="tocht-special-item"><span>🍺</span><span>Na afloop: streekbiertje Viven</span></div>
                 </div>
             </div>
             <div class="tocht-sidebar">
@@ -1425,15 +1349,22 @@
                         <span class="key-value">OLVA — Onze-Lieve-Vrouwecollege</span>
                     </div>
                     <div class="key-info-row">
-                        <span class="key-label">Gemeente</span>
-                        <span class="key-value">Brugge</span>
+                        <span class="key-label">Adres</span>
+                        <span class="key-value">Collegestraat 24 — 8310 Assebroek</span>
+                    </div>
+                    <div class="key-info-row">
+                        <span class="key-label">Starturen</span>
+                        <span class="key-value">08.00 – 15.00</span>
+                    </div>
+                    <div class="key-info-row">
+                        <span class="key-label">Laatste aankomst</span>
+                        <span class="key-value">18.00</span>
                     </div>
                     <div class="key-info-row">
                         <span class="key-label">Datum 2026</span>
                         <span class="key-value">Maandag 25 mei 2026</span>
                     </div>
                 </div>
-                <a href="https://www.brugse-metten-wandelclub.be/blank" target="_blank" rel="noopener" class="tocht-ext-link">Officiële pagina →</a>
             </div>
         </div>
     </div>
@@ -1483,7 +1414,6 @@
                         <span class="key-value">Groen Brugge · Domein Koude Keuken</span>
                     </div>
                 </div>
-                <a href="https://www.brugse-metten-wandelclub.be/blank-4" target="_blank" rel="noopener" class="tocht-ext-link">Officiële pagina →</a>
             </div>
         </div>
     </div>
@@ -1539,7 +1469,6 @@
                         <span class="key-value">Assebroekse Meersen · Domein Ryckevelde</span>
                     </div>
                 </div>
-                <a href="https://www.brugse-metten-wandelclub.be/blank-5" target="_blank" rel="noopener" class="tocht-ext-link">Officiële pagina →</a>
             </div>
         </div>
     </div>
